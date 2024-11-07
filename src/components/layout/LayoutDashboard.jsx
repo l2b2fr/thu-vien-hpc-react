@@ -21,8 +21,8 @@ function Layout({ children }) {
         <HeaderTop isOpen={isOpen} setIsOpen={setIsOpen} />
         <main
           className={`${
-            isOpen ? "ml-[240px]" : "ml-[70px]"
-          } pt-[80px] p-[10px] w-auto h-auto overflow-auto transition-all duration-300 ease-in-out`}
+            isOpen ? "pl-[250px]" : "pl-[80px]"
+          } pt-[80px] p-[10px] w-full h-screen overflow-auto transition-all duration-300 ease-in-out`}
         >
           {children}
         </main>
