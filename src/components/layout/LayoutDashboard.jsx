@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import MenuLeft from "../MenuLeft";
 import HeaderTop from "../HeaderTop";
+import ModalAddUser from "../UserManager/ModalAddUser";
 
 function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(() => {
@@ -27,6 +28,7 @@ function Layout({ children }) {
           {children}
         </main>
       </div>
+      <ModalAddUser />
     </>
   );
 }

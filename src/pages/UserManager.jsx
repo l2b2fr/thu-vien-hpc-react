@@ -4,6 +4,8 @@ import AddButton from "../components/AddButton";
 import ButtonRules from "../components/ButtonRules";
 import DataTable from "react-data-table-component";
 import { toast } from "sonner";
+import ModalAddUser from "../components/UserManager/ModalAddUser";
+
 const data = [
   { id: 1, name: "John Doe", email: "john@example.com", age: 30 },
   { id: 2, name: "Jane Doe", email: "jane@example.com", age: 25 },
@@ -123,6 +125,7 @@ const customStyles = {
 function UserManager() {
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState(data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Hàm tìm kiếm
   const handleSearch = (e) => {
@@ -134,6 +137,9 @@ function UserManager() {
     setFilteredData(filtered);
   };
 
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <>
       <h1 className="text-[30px] font-bold text-color-text-light">
@@ -144,7 +150,9 @@ function UserManager() {
           <div className="flex justify-center">
             <div
               className="flex justify-center"
-              onClick={() => toast.info("Chức năng đang phát triển")}
+              onClick={() => {
+                openModal();
+              }}
             >
               <AddButton title="Thêm người dùng" />
             </div>
@@ -188,6 +196,7 @@ function UserManager() {
           />
         </div>
       </div>
+      <ModalAddUser isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 }
