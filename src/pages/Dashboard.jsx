@@ -24,8 +24,8 @@ function Dashboard() {
     <>
       <h1 className="text-[30px] font-bold text-color-text-light">Trang chủ</h1>
       <div className="flex flex-row mt-[10px]">
-        <div className="flex flex-col w-1/2 max-[w-500px]">
-          <div className="w-1/1 h-[250px] bg-white rounded-md flex flex-col">
+        <div className="flex flex-col w-[50%] max-[w-500px]">
+          <div className="w-full h-[250px] bg-white rounded-md flex flex-col">
             <div
               style={{ backgroundImage: `url(${BgHPC})` }}
               alt=""

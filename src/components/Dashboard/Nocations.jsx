@@ -5,7 +5,7 @@ function Nocations() {
 
   return (
     <>
-      <div className="w-[80vh] max-w-md h-auto bg-white mt-6 rounded-lg shadow-lg p-6 mx-auto overflow-hidden hover:cursor-pointer hover:scale-105 transition-transform duration-300 border border-gray-300">
+      <div className="w-[90%] max-w-md h-auto bg-white mt-6 rounded-lg shadow-lg p-6 mx-auto overflow-hidden hover:cursor-pointer hover:scale-105 transition-transform duration-300 border border-gray-300">
         <div className="flex items-start">
           <div className="flex-shrink-0 bg-blue-100 text-white rounded-full p-3">
             <img src={Nocation} alt="" srcset="" className="h-5 w-6 object-cover" />
