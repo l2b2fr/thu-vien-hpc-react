@@ -6,13 +6,26 @@ import {
   useNavigate,
 } from "react-router-dom";
 import React from "react";
+import { useState, useEffect } from "react";
 import LoginForm from "./pages/LoginForm";
 import ForgotPasswordForm from "./pages/ForgotPasswordForm";
 import Layout from "./components/layout/LayoutDashboard";
 import LayoutAuth from "./components/layout/LayoutAuth";
 import { Toaster } from "sonner";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
+
+  const [isOpen, setIsOpen] = useState(() => {
+    const savedState = localStorage.getItem("isOpen");
+    return savedState !== null ? JSON.parse(savedState) : true;
+  });
+
+  useEffect(() => {
+    const savedState = localStorage.getItem("isOpen");
+    setIsOpen(savedState !== null ? JSON.parse(savedState) : true);
+  }, []);
+
   return (
     <>
       <Toaster position="top-right" richColors />
@@ -45,9 +58,7 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full bg-bgr-down-light">
-                      Trang chủ
-                    </h1>
+                    <Dashboard isOpen={isOpen} setIsOpen={setIsOpen}/>
                   </Layout>
                 </>
               }

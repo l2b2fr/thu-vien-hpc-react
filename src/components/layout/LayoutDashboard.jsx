@@ -19,10 +19,15 @@ function Layout({ children }) {
       <div className="flex bg-bgr-down-light">
         <MenuLeft isOpen={isOpen} setIsOpen={setIsOpen} />
         <HeaderTop isOpen={isOpen} setIsOpen={setIsOpen} />
-        <main className="p-[10px] h-screen overflow-auto">{children}</main>
+        <main
+          className={`${
+            isOpen ? "ml-[240px]" : "ml-[70px]"
+          } pt-[80px] p-[10px] w-auto h-auto overflow-auto transition-all duration-300 ease-in-out`}
+        >
+          {children}
+        </main>
       </div>
     </>
-
   );
 }
 

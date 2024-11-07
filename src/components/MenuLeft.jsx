@@ -19,31 +19,31 @@ function MenuLeft({ isOpen, setIsOpen }) {
   const menuData = [
     { name: "Trang chủ", icon: { IconHome }, active: "trangchu", path: "/" },
     {
-      name: "Lập thẻ độc giả",
+      name: "Quản lý độc giả",
       icon: { IconTheDocGia },
       active: "lapthe",
       path: "/lap-the-doc-gia",
     },
     {
-      name: "Tiếp nhận sách mới",
+      name: "Quản lý tài liệu",
       icon: { IconThemSach },
       active: "tiepnhan",
       path: "/tiep-nhan-sach-moi",
     },
+    // {
+    //   name: "Tra cứu sách",
+    //   icon: { IconTimKiemSach },
+    //   active: "tracuusach",
+    //   path: "/tra-cuu-sach",
+    // },
     {
-      name: "Tra cứu sách",
-      icon: { IconTimKiemSach },
-      active: "tracuusach",
-      path: "/tra-cuu-sach",
-    },
-    {
-      name: "Cho mượn sách",
+      name: "Quản lý mượn đặt sách",
       icon: { IconMuonSach },
       active: "chomuon",
       path: "/cho-muon-sach",
     },
     {
-      name: "Nhận trả sách",
+      name: "Quản lý trả sách",
       icon: { IconNhanTraSach },
       active: "nhantra",
       path: "/nhan-tra-sach",
@@ -55,7 +55,7 @@ function MenuLeft({ isOpen, setIsOpen }) {
       path: "/lap-phieu-thu-tien-phat",
     },
     {
-      name: "Lập báo cáo",
+      name: "Thống kê báo cáo",
       icon: { IconBaoCao },
       active: "lapbao",
       path: "/lap-bao-cao",
