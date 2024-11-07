@@ -13,9 +13,9 @@ import Layout from "./components/layout/LayoutDashboard";
 import LayoutAuth from "./components/layout/LayoutAuth";
 import { Toaster } from "sonner";
 import Dashboard from "./pages/Dashboard";
+import UserManager from "./pages/UserManager";
 
 function App() {
-
   const [isOpen, setIsOpen] = useState(() => {
     const savedState = localStorage.getItem("isOpen");
     return savedState !== null ? JSON.parse(savedState) : true;
@@ -58,7 +58,7 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <Dashboard isOpen={isOpen} setIsOpen={setIsOpen}/>
+                    <Dashboard />
                   </Layout>
                 </>
               }
@@ -68,9 +68,7 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full">
-                      Lập thẻ độc giả
-                    </h1>
+                    <UserManager />
                   </Layout>
                 </>
               }

@@ -22,7 +22,7 @@ function Layout({ children }) {
         <main
           className={`${
             isOpen ? "pl-[250px]" : "pl-[80px]"
-          } pt-[80px] p-[10px] w-full h-screen overflow-auto transition-all duration-300 ease-in-out`}
+          } pt-[80px] p-[20px] w-full h-screen overflow-auto transition-all duration-300 ease-in-out`}
         >
           {children}
         </main>

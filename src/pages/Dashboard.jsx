@@ -69,13 +69,13 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="flex flex-col ml-[20px] mr-[10px] w-screen">
+        <div className="flex flex-col ml-[20px] w-screen">
           <div className="flex flex-row space-x-[20px]">
             <div className="w-1/4 h-[130px] bg-white rounded-md relative ">
               <h2 className="text-[20px] font-bold text-black ml-4 mt-4">
                 Số sách
               </h2>
-              <div className="text-[#01B2FF] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman']">
+              <div className="text-[#01B2FF] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman'] fade-in">
                 120 <span className="text-black">quyển</span>
               </div>
               <img
@@ -93,7 +93,7 @@ function Dashboard() {
               <h2 className="text-[20px] font-bold text-black ml-4 mt-4">
                 Số độc giả
               </h2>
-              <div className="text-[#C1571A] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman']">
+              <div className="text-[#C1571A] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman'] fade-in">
                 263 <span className="text-black">người</span>
               </div>
               <img
@@ -111,7 +111,7 @@ function Dashboard() {
               <h2 className="text-[20px] font-bold text-black ml-4 mt-4">
                 Số lượt trả
               </h2>
-              <div className="text-[#0900FF] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman']">
+              <div className="text-[#0900FF] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman'] fade-in">
                 1.239 <span className="text-black">lượt</span>
               </div>
               <img
@@ -129,7 +129,7 @@ function Dashboard() {
               <h2 className="text-[20px] font-bold text-black ml-4 mt-4">
                 Trả quá hạn
               </h2>
-              <div className="text-[#FF0000] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman']">
+              <div className="text-[#FF0000] text-[20px] ml-4 mt-6 font-bold font-['Times New Roman'] fade-in">
                 39 <span className="text-black">lượt</span>
               </div>
               <img
