@@ -18,7 +18,7 @@ function HeaderTop({ isOpen, setIsOpen }) {
   return (
     <>
       <div
-        className={`w-screen h-[70px] bg-bgr-up-light border-l duration-300 border-black border-opacity-10 flex fixed top-0 ${
+        className={`w-screen h-[70px] bg-bgr-up-light border-l duration-300 border-black border-opacity-10 flex fixed top-0 z-[9999] ${
           isOpen ? "left-[230px]" : "left-[60px]"
         }`}
       >

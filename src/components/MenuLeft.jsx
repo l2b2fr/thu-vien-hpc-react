@@ -73,7 +73,7 @@ function MenuLeft({ isOpen, setIsOpen }) {
       <div
         className={`h-screen ${
           isOpen ? "w-[230px]" : "w-[60px]"
-        } bg-bgr-up-light duration-300 fixed top-0 left-0`}
+        } bg-bgr-up-light duration-300 fixed top-0 left-0 z-[9999]`}
       >
         <div className="flex p-[10px] h-[70px] content-center items-center">
           <img

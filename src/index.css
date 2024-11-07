@@ -10,3 +10,44 @@
     box-sizing: border-box;
   }
 }
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    /* Tạo hiệu ứng chữ trượt từ dưới lên */
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 1s ease-out forwards;
+  /* 1s là thời gian chạy hiệu ứng */
+}
+
+@keyframes custom-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    /* Độ cao của bounce */
+  }
+}
+
+.bounce-slow {
+  animation: custom-bounce 2s infinite;
+  /* 2s là thời gian cho một vòng lặp */
+}
+
+.bounce-fast {
+  animation: custom-bounce 0.5s infinite;
+  /* 0.5s cho tốc độ nhanh hơn */
+}
