@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import MenuLeft from "../MenuLeft";
 import HeaderTop from "../HeaderTop";
 import ModalAddUser from "../UserManager/ModalAddUser";
+import ModalUpdateUser from "../UserManager/ModalUpdateUser";
 
 function Layout({ children }) {
   const [isOpen, setIsOpen] = useState(() => {
@@ -29,6 +30,7 @@ function Layout({ children }) {
         </main>
       </div>
       <ModalAddUser />
+      <ModalUpdateUser />
     </>
   );
 }

@@ -8,12 +8,14 @@ import IconDown from "../assets/icons/menus/down.png";
 import BgHPC from "../assets/image/banner-hpc2.jpg";
 import IconHuman from "../assets/icons/humans/z5813034854254_ed1be327fb2db9b4512d44e194b0a054.jpg";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonLogout from "../components/Dashboard/ButtonLogout";
 import { toast } from "sonner";
 import Nocations from "../components/Dashboard/Nocations";
 import ChartComponent from "../components/Dashboard/ChartComponent";
 
 function Dashboard() {
+  const navigate = useNavigate();
   const user = {
     name: "Đỗ Thị Thơm",
     avatar: IconHuman,
@@ -50,7 +52,9 @@ function Dashboard() {
               </div>
               <div
                 className="absolute right-[20px] hover:cursor-pointer"
-                onClick={() => toast.success("Đăng nhập thành công!")}
+                onClick={() => {
+                  navigate("/login");
+                }}
               >
                 <ButtonLogout />
               </div>
