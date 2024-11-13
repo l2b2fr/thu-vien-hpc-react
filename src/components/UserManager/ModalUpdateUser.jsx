@@ -4,6 +4,7 @@ import IconClose from "../../assets/icons/menus/closemodal.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import IconAnhSach from "../../assets/image/image.png";
 
 function ModalUpdateUser({ isOpen, onClose, user }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,18 +45,18 @@ function ModalUpdateUser({ isOpen, onClose, user }) {
   ];
 
   const [formData, setFormData] = useState({
-    maNguoiDung: user ? user.id : '',
-    tenNguoiDung: user ? user.tenNguoiDung : '',
-    phone: user ? user.phone : '',
-    ngaySinh: user ? user.ngaySinh : '',
-    queQuan: user ? user.queQuan : '',
-    diaChi: user ? user.diaChi : '',
-    email: user ? user.email : '',
-    imageUrl: user ? user.imageUrl : '',
-    ghiChu: user ? user.ghiChu : '',
-    taiKhoan: user ? user.taiKhoan : '',
-    matKhau: user ? user.matKhau : '',
-    trangThai: user ? user.trangThai : '',
+    maNguoiDung: user ? user.id : "",
+    tenNguoiDung: user ? user.tenNguoiDung : "",
+    phone: user ? user.phone : "",
+    ngaySinh: user ? user.ngaySinh : "",
+    queQuan: user ? user.queQuan : "",
+    diaChi: user ? user.diaChi : "",
+    email: user ? user.email : "",
+    imageUrl: user ? user.imageUrl : "",
+    ghiChu: user ? user.ghiChu : "",
+    taiKhoan: user ? user.taiKhoan : "",
+    matKhau: user ? user.matKhau : "",
+    trangThai: user ? user.trangThai : "",
   });
 
   useEffect(() => {
@@ -202,11 +203,7 @@ function ModalUpdateUser({ isOpen, onClose, user }) {
                   {/* Upload Ảnh */}
                   <div className="flex items-center space-x-4">
                     <img
-                      src={
-                        formData.imageUrl
-                          ? formData.imageUrl
-                          : "defaultImage.png"
-                      }
+                      src={formData.imageUrl ? formData.imageUrl : IconAnhSach}
                       alt="Uploaded"
                       className="w-[55px] h-[55px] object-cover rounded-full"
                       onLoad={() =>

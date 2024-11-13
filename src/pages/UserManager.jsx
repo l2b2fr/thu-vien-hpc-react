@@ -307,7 +307,7 @@ function UserManager() {
           </div>
         </div>
 
-        <div className="w-full h-full p-4 bg-white rounded-lg">
+        <div className="w-full h-full p-4 bg-white rounded-lg shadow-lg">
           <h2 className="text-xl font-semibold text-color-text-light mb-4">
             Danh sách người dùng
           </h2>

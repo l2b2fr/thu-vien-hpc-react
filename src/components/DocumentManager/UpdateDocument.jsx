@@ -3,19 +3,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import IconAnhSach from "../../assets/image/image.png";
 
-function AddDocument({ isOpen, onClose }) {
+function UpdateDocument({ isOpen, onClose, documentData }) {
   const trangThaiOptions = [
-    {
-      value: "0",
-      label: "Thẻ đóng",
-    },
-    {
-      value: "1",
-      label: "Thẻ mở",
-    },
+    { value: "0", label: "Thẻ đóng" },
+    { value: "1", label: "Thẻ mở" },
   ];
 
-  const theLoaiOptions = [
+  const theLoaiOptions = [    
     { idTheLoai: 1, label: "Khoa học viễn tưởng" },
     { idTheLoai: 2, label: "Văn học cổ điển" },
     { idTheLoai: 3, label: "Tiểu thuyết trinh thám" },
@@ -42,19 +36,21 @@ function AddDocument({ isOpen, onClose }) {
   });
 
   useEffect(() => {
-    setFormData({
-      idTheLoai: "",
-      maISBN: "",
-      tieuDe: "",
-      tacGia: "",
-      nhaXuatBan: "",
-      namXuatBan: "",
-      soLuong: "",
-      imageUrl: null,
-      tinhTrangSach: "",
-      trangThai: "",
-    });
-  }, [isOpen]);
+    if (documentData) {
+      setFormData({
+        idTheLoai: documentData.idTheLoai || "",
+        maISBN: documentData.maISBN || "",
+        tieuDe: documentData.tieuDe || "",
+        tacGia: documentData.tacGia || "",
+        nhaXuatBan: documentData.nhaXuatBan || "",
+        namXuatBan: documentData.namXuatBan || "",
+        soLuong: documentData.soLuong || "",
+        imageUrl: documentData.imageUrl || null,
+        tinhTrangSach: documentData.tinhTrangSach || "",
+        trangThai: documentData.trangThai || "",
+      });
+    }
+  }, [documentData]);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -68,14 +64,13 @@ function AddDocument({ isOpen, onClose }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "https://your-api-endpoint.com",
+      const response = await axios.put(
+        `https://your-api-endpoint.com/${documentData.id}`,
         formData
       );
-      console.log("Success:", response.data);
-      // Xử lý dữ liệu phản hồi từ server (nếu cần)
+      console.log("Update Success:", response.data);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Update Error:", error);
     }
   };
 
@@ -139,7 +134,6 @@ function AddDocument({ isOpen, onClose }) {
                     onChange={handleChange}
                     className="mb-4"
                   />
-
                   <TextField
                     id="namXuatBan"
                     label="Năm Xuất Bản"
@@ -169,7 +163,6 @@ function AddDocument({ isOpen, onClose }) {
                     onChange={handleChange}
                     className="mb-4"
                   />
-
                   <TextField
                     id="soLuong"
                     label="Số Lượng"
@@ -187,7 +180,7 @@ function AddDocument({ isOpen, onClose }) {
                   >
                     <option value="">Chọn thể loại</option>
                     {theLoaiOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
+                      <option key={option.idTheLoai} value={option.idTheLoai}>
                         {option.label}
                       </option>
                     ))}
@@ -215,7 +208,7 @@ function AddDocument({ isOpen, onClose }) {
                     onClick={handleSubmit}
                     className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-7 rounded-lg"
                   >
-                    Lưu
+                    Cập nhật
                   </button>
                   <button
                     onClick={onClose}
@@ -233,4 +226,4 @@ function AddDocument({ isOpen, onClose }) {
   );
 }
 
-export default AddDocument;
+export default UpdateDocument;

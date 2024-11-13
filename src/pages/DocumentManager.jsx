@@ -8,6 +8,7 @@ import ModalAddUser from "../components/UserManager/ModalAddUser";
 import ModalUpdateUser from "../components/UserManager/ModalUpdateUser";
 import { Button } from "@mui/material";
 import AddDocument from "./../components/DocumentManager/AddDocument";
+import UpdateDocument from "../components/DocumentManager/UpdateDocument";
 
 function DocumentManager() {
   const data = [
@@ -350,7 +351,7 @@ function DocumentManager() {
   const [filteredData, setFilteredData] = useState(data);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -372,7 +373,7 @@ function DocumentManager() {
 
   // Hàm xử lý Sửa
   const handleEdit = (row) => {
-    setSelectedUser(row); // Set the selected user
+    setSelectedDocument(row); // Set the selected user
     openUpdateModal();
     alert(`Sửa thông tin: ${row.id}`);
   };
@@ -426,9 +427,14 @@ function DocumentManager() {
         </div>
 
         <AddDocument isOpen={isAddOpen} onClose={closeAddModal} />
+        <UpdateDocument
+          isOpen={isUpdateOpen}
+          onClose={closeUpdateModal}
+          documentData={selectedDocument}
+        />
 
         <div
-          className={`w-full h-full p-4 bg-white rounded-lg transition-all duration-500 ease-in-out transform ${
+          className={`w-full h-full p-4 bg-white rounded-lg transition-all duration-500 ease-in-out transform shadow-lg ${
             isAddOpen ? "translate-y-4" : "translate-y-0"
           }`}
         >

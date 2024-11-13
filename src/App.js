@@ -15,6 +15,10 @@ import { Toaster } from "sonner";
 import Dashboard from "./pages/Dashboard";
 import UserManager from "./pages/UserManager";
 import DocumentManager from "./pages/DocumentManager";
+import BorrowReserveManager from "./pages/BorrowReserveManager";
+import SoftwareInfo from "./pages/SoftwareInfo";
+import LibraryReport from "./pages/LibraryReport";
+import ReturnBookManager from "./pages/ReturnBookManager";
 
 function App() {
   const [isOpen, setIsOpen] = useState(() => {
@@ -101,21 +105,17 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full">
-                      Cho mượn sách
-                    </h1>
+                    <BorrowReserveManager />
                   </Layout>
                 </>
               }
             />
             <Route
-              path="/nhan-tra-sach"
+              path="/quan-ly-tra-sach"
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full">
-                      Nhận trả sách
-                    </h1>
+                    <ReturnBookManager />
                   </Layout>
                 </>
               }
@@ -137,9 +137,7 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full">
-                      Lập báo cáo
-                    </h1>
+                    <LibraryReport />
                   </Layout>
                 </>
               }
@@ -149,9 +147,7 @@ function App() {
               element={
                 <>
                   <Layout>
-                    <h1 className="text-center font-bold text-7xl w-full">
-                      Thông tin phần mềm
-                    </h1>
+                    <SoftwareInfo />
                   </Layout>
                 </>
               }

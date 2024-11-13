@@ -4,6 +4,7 @@ import IconClose from "../../assets/icons/menus/closemodal.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import IconAnhSach from "../../assets/image/image.png";
 
 function ModalAddUser({ isOpen, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -203,7 +204,7 @@ function ModalAddUser({ isOpen, onClose }) {
                       src={
                         formData.imageUrl
                           ? formData.imageUrl
-                          : "defaultImage.png"
+                          : IconAnhSach
                       }
                       alt="Uploaded"
                       className="w-[55px] h-[55px] object-cover rounded-full"

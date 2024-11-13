@@ -46,14 +46,14 @@ function MenuLeft({ isOpen, setIsOpen }) {
       name: "Quản lý trả sách",
       icon: { IconNhanTraSach },
       active: "nhantra",
-      path: "/nhan-tra-sach",
+      path: "/quan-ly-tra-sach",
     },
-    {
-      name: "Lập phiếu thu tiền phạt",
-      icon: { IconThuTienPhat },
-      active: "lapphieu",
-      path: "/lap-phieu-thu-tien-phat",
-    },
+    // {
+    //   name: "Lập phiếu thu tiền phạt",
+    //   icon: { IconThuTienPhat },
+    //   active: "lapphieu",
+    //   path: "/lap-phieu-thu-tien-phat",
+    // },
     {
       name: "Thống kê báo cáo",
       icon: { IconBaoCao },
