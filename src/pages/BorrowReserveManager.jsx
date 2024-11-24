@@ -180,7 +180,9 @@ function BorrowReserveManager() {
       cell: (row) => (
         <div className="flex space-x-2 w-full justify-center items-center">
           <button
-            onClick={() => handleEdit(row)}
+            onClick={() => {
+              openAddModal();
+            }}
             className="px-3 py-1 text-sm font-semibold text-white bg-blue-500 rounded hover:bg-blue-700"
           >
             Lập phiếu mượn
@@ -245,15 +247,17 @@ function BorrowReserveManager() {
   };
 
   const openAddModal = () => setIsModalAddOpen(true);
-  const closeAddModal = () => setIsModalAddOpen(false);
+  const closeAddModal = () => {
+    setIsModalAddOpen(false);
+    setSelectedUser(null);
+  };
   const openUpdateModal = () => setIsModalUpdateOpen(true);
   const closeUpdateModal = () => setIsModalUpdateOpen(false);
 
   // Hàm xử lý Sửa
   const handleEdit = (row) => {
-    setSelectedUser(row); // Set the selected user
-    openUpdateModal();
-    alert(`Sửa thông tin: ${row.id}`);
+    setSelectedUser(row.id); // Set the selected user
+    openAddModal();
   };
 
   // Hàm xử lý Xóa
@@ -329,11 +333,15 @@ function BorrowReserveManager() {
           />
         </div>
       </div>
-      <ModalReturnBook isOpen={isModalAddOpen} onClose={closeAddModal} />
+      <ModalBorrowBook
+        isOpen={isModalAddOpen}
+        onClose={closeAddModal}
+        idNguoiDung={selectedUser}
+      />
       <ModalUpdateUser
         isOpen={isModalUpdateOpen}
         onClose={closeUpdateModal}
-        user={selectedUser} // Pass selected user to modal
+        user={selectedUser}
       />
     </>
   );

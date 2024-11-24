@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import IconTimKiem from "../assets/icons/menus/kinh-nup.png";
 import AddButton from "../components/AddButton";
 import ButtonRules from "../components/ButtonRules";
@@ -6,151 +7,107 @@ import DataTable from "react-data-table-component";
 import { toast } from "sonner";
 import ModalAddUser from "../components/UserManager/ModalAddUser";
 import ModalUpdateUser from "../components/UserManager/ModalUpdateUser";
+import { useNavigate } from "react-router-dom";
 
 function UserManager() {
-  const data = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john@example.com",
-      age: 30,
-      phone: "123456789",
-      address: "123 Main St",
-      status: "Đang mở",
-    },
-    {
-      id: 2,
-      name: "Jane Doe",
-      email: "jane@example.com",
-      age: 25,
-      phone: "987654321",
-      address: "456 Elm St",
-      status: "Đang đóng",
-    },
-    {
-      id: 3,
-      name: "Mike Doe",
-      email: "mike@example.com",
-      age: 35,
-      phone: "111222333",
-      address: "789 Oak St",
-      status: "Đang mở",
-    },
-    {
-      id: 4,
-      name: "Emily Chen",
-      email: "emily@example.com",
-      age: 28,
-      phone: "444555666",
-      address: "012 Pine St",
-      status: "Đang đóng",
-    },
-    {
-      id: 5,
-      name: "David Lee",
-      email: "david@example.com",
-      age: 32,
-      phone: "777888999",
-      address: "345 Maple St",
-      status: "Đang mở",
-    },
-    {
-      id: 6,
-      name: "Sarah Taylor",
-      email: "sarah@example.com",
-      age: 29,
-      phone: "000111222",
-      address: "678 Birch St",
-      status: "Đang đóng",
-    },
-    {
-      id: 7,
-      name: "Kevin Brown",
-      email: "kevin@example.com",
-      age: 31,
-      phone: "333444555",
-      address: "901 Walnut St",
-      status: "Đang mở",
-    },
-    {
-      id: 8,
-      name: "Lisa Nguyen",
-      email: "lisa@example.com",
-      age: 26,
-      phone: "666777888",
-      address: "234 Cedar St",
-      status: "Đang đóng",
-    },
-    {
-      id: 9,
-      name: "Michael Davis",
-      email: "michael@example.com",
-      age: 33,
-      phone: "999000111",
-      address: "567 Pine St",
-      status: "Đang mở",
-    },
-    {
-      id: 10,
-      name: "Jessica Martin",
-      email: "jessica@example.com",
-      age: 27,
-      phone: "222333444",
-      address: "890 Oak St",
-      status: "Đang đóng",
-    },
-    {
-      id: 11,
-      name: "Olivia White",
-      email: "olivia@example.com",
-      age: 24,
-      phone: "555666777",
-      address: "123 Elm St",
-      status: "Đang mở",
-    },
-    {
-      id: 12,
-      name: "Alexander Smith",
-      email: "alexander@example.com",
-      age: 34,
-      phone: "888999000",
-      address: "456 Birch St",
-      status: "Đang đóng",
-    },
-    {
-      id: 13,
-      name: "Isabella Johnson",
-      email: "isabella@example.com",
-      age: 30,
-      phone: "123456789",
-      address: "789 Walnut St",
-      status: "Đang mở",
-    },
-  ];
-  // Định nghĩa cột
+  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [search, setSearch] = useState("");
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("userToken");
+        const response = await axios.get(
+          "http://localhost:2004/api/user/getAllUser",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setUsers(response.data.users);
+        setFilteredData(response.data.users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        toast.error("Không thể tải dữ liệu người dùng.");
+      }
+    };
+
+    fetchUsers();
+  }, [isModalAddOpen, isModalUpdateOpen]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    const searchTerm = e.target.value.toLowerCase();
+    const filtered = users.filter(
+      (item) =>
+        item.maNguoiDung.toLowerCase().includes(searchTerm) ||
+        item.tenNguoiDung.toLowerCase().includes(searchTerm) ||
+        item.email.toLowerCase().includes(searchTerm) ||
+        item.phone.includes(searchTerm) ||
+        item.diaChi.toLowerCase().includes(searchTerm) ||
+        item.queQuan.toLowerCase().includes(searchTerm)
+    );
+    setFilteredData(filtered);
+  };
+
+  const openAddModal = () => setIsModalAddOpen(true);
+  const closeAddModal = () => setIsModalAddOpen(false);
+  const openUpdateModal = () => setIsModalUpdateOpen(true);
+  const closeUpdateModal = () => setIsModalUpdateOpen(false);
+
+  const handleEdit = (row) => {
+    setSelectedUser(row);
+    openUpdateModal();
+  };
+
+  const handleDelete = async (row) => {
+    const confirmDelete = window.confirm(
+      `Bạn có chắc muốn xóa ${row.tenNguoiDung}?`
+    );
+
+    if (confirmDelete) {
+      try {
+        const res = await axios.delete(
+          `http://localhost:2004/api/user/delete/${row.idNguoiDung}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+            },
+          }
+        );
+
+        toast.success("Xóa người dùng thành công");
+        navigate("/lap-the-doc-gia");
+      } catch (error) {
+        console.error("Failed to delete user:", error);
+        toast.error(`Xóa ${row.tenNguoiDung} thất bại`);
+      }
+    }
+  };
+
   const columns = [
     {
       name: "ID",
-      selector: (row) => row.id,
+      selector: (row) => row.maNguoiDung,
       sortable: true,
-      width: "100px",
       textAlign: "left",
+      width: "100px",
     },
     {
       name: "Tên",
-      selector: (row) => row.name,
+      selector: (row) => row.tenNguoiDung,
       sortable: true,
       textAlign: "left",
     },
     {
       name: "Email",
       selector: (row) => row.email,
-      sortable: true,
-      textAlign: "left",
-    },
-    {
-      name: "Tuổi",
-      selector: (row) => row.age,
       sortable: true,
       textAlign: "left",
     },
@@ -162,13 +119,13 @@ function UserManager() {
     },
     {
       name: "Địa chỉ",
-      selector: (row) => row.address,
+      selector: (row) => row.diaChi,
       sortable: true,
       textAlign: "left",
     },
     {
-      name: "Trạng thái",
-      selector: (row) => row.status,
+      name: "Quê quán",
+      selector: (row) => row.queQuan,
       sortable: true,
       textAlign: "left",
     },
@@ -193,8 +150,7 @@ function UserManager() {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-      width: "150px", // Adjusted to make the column wider
-      textAlign: "left",
+      width: "150px",
     },
   ];
 
@@ -225,49 +181,6 @@ function UserManager() {
     },
   };
 
-  const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState(data);
-  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
-  const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-
-  // Hàm tìm kiếm
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    const searchTerm = e.target.value;
-    const filtered = data.filter(
-      (item) =>
-        item.id.toString().includes(searchTerm) ||
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.phone.includes(searchTerm) ||
-        item.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.status.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredData(filtered);
-  };
-
-  const openAddModal = () => setIsModalAddOpen(true);
-  const closeAddModal = () => setIsModalAddOpen(false);
-  const openUpdateModal = () => setIsModalUpdateOpen(true);
-  const closeUpdateModal = () => setIsModalUpdateOpen(false);
-
-  // Hàm xử lý Sửa
-  const handleEdit = (row) => {
-    setSelectedUser(row); // Set the selected user
-    openUpdateModal();
-    alert(`Sửa thông tin: ${row.id}`);
-  };
-
-  // Hàm xử lý Xóa
-  const handleDelete = (row) => {
-    const confirmDelete = window.confirm(`Bạn có chắc muốn xóa ${row.name}?`);
-    if (confirmDelete) {
-      alert(`Đã xóa ${row.name}`);
-      // Thực hiện xóa khỏi dữ liệu
-    }
-  };
-
   return (
     <>
       <h1 className="text-[30px] font-bold text-color-text-light">
@@ -276,12 +189,7 @@ function UserManager() {
       <div className="flex flex-col mt-[10px] space-y-5">
         <div className="justify-between h-[80px] w-full bg-white rounded-md flex">
           <div className="flex justify-center">
-            <div
-              className="flex justify-center"
-              onClick={() => {
-                openAddModal();
-              }}
-            >
+            <div className="flex justify-center" onClick={openAddModal}>
               <AddButton title="Thêm người dùng" />
             </div>
             <div
@@ -291,7 +199,7 @@ function UserManager() {
               <ButtonRules />
             </div>
           </div>
-          <div class="w-[590px] h-[45px] bg-bgr-down-light rounded-[20px] border-none border-[#a4a5a5] my-auto mx-0 flex mr-4">
+          <div className="w-[590px] h-[45px] bg-bgr-down-light rounded-[20px] border-none border-[#a4a5a5] my-auto mx-0 flex mr-4">
             <img
               src={IconTimKiem}
               alt=""
@@ -328,7 +236,7 @@ function UserManager() {
       <ModalUpdateUser
         isOpen={isModalUpdateOpen}
         onClose={closeUpdateModal}
-        user={selectedUser} // Pass selected user to modal
+        user={selectedUser}
       />
     </>
   );

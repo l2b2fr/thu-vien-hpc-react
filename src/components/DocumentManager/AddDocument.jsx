@@ -150,6 +150,22 @@ function AddDocument({ isOpen, onClose }) {
                     onChange={handleChange}
                     className="mb-4"
                   />
+
+                  <div className="w-full mt-4">
+                    <select
+                      id="trangThai"
+                      value={formData.trangThai}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 h-[56px]"
+                    >
+                      <option value="">Chọn vị trí</option>
+                      {trangThaiOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="flex flex-col w-[45%] space-y-4">
@@ -192,22 +208,22 @@ function AddDocument({ isOpen, onClose }) {
                       </option>
                     ))}
                   </select>
-                </div>
 
-                <div className="w-full mt-4">
-                  <select
-                    id="trangThai"
-                    value={formData.trangThai}
-                    onChange={handleChange}
-                    className="mt-1 block w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 h-[56px]"
-                  >
-                    <option value="">Chọn trạng thái</option>
-                    {trangThaiOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="w-full mt-4">
+                    <select
+                      id="trangThai"
+                      value={formData.trangThai}
+                      onChange={handleChange}
+                      className="mt-1 block w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 h-[56px]"
+                    >
+                      <option value="">Chọn trạng thái</option>
+                      {trangThaiOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div className="w-full flex justify-end space-x-4 mt-4">

@@ -149,7 +149,6 @@ function ModalReturnBook({ isOpen, onClose, profileData }) {
                 className="w-full"
               />
 
-              {/* Title for book selection */}
               <div className="mt-6">
                 <h3 className="text-lg font-semibold text-color-text-light mb-4">
                   Chọn danh sách sách

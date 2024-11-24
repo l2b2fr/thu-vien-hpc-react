@@ -3,7 +3,6 @@ import React from "react";
 function SoftwareInfo() {
   return (
     <div className="p-8 bg-gray-50 min-h-screen rounded-md my-3 shadow-lg">
-      {/* Header */}
       <header className="text-center mb-12">
         <h1 className="text-4xl font-bold text-blue-600">Thông Tin Phần Mềm</h1>
         <p className="mt-2 text-color-text-light">
@@ -11,7 +10,6 @@ function SoftwareInfo() {
         </p>
       </header>
 
-      {/* About Section */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-color-text-light">
           Giới Thiệu
@@ -24,7 +22,6 @@ function SoftwareInfo() {
         </p>
       </section>
 
-      {/* Features Section */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-color-text-light mb-4">
           Tính Năng Nổi Bật
@@ -37,7 +34,6 @@ function SoftwareInfo() {
         </ul>
       </section>
 
-      {/* System Requirements Section */}
       <section className="mb-12">
         <h2 className="text-2xl font-semibold text-color-text-light mb-4">
           Yêu Cầu Hệ Thống

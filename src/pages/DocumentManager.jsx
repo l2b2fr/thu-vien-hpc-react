@@ -4,9 +4,6 @@ import AddButton from "../components/AddButton";
 import ButtonRules from "../components/ButtonRules";
 import DataTable from "react-data-table-component";
 import { toast } from "sonner";
-import ModalAddUser from "../components/UserManager/ModalAddUser";
-import ModalUpdateUser from "../components/UserManager/ModalUpdateUser";
-import { Button } from "@mui/material";
 import AddDocument from "./../components/DocumentManager/AddDocument";
 import UpdateDocument from "../components/DocumentManager/UpdateDocument";
 
@@ -373,7 +370,7 @@ function DocumentManager() {
 
   // Hàm xử lý Sửa
   const handleEdit = (row) => {
-    setSelectedDocument(row); // Set the selected user
+    setSelectedDocument(row);
     openUpdateModal();
     alert(`Sửa thông tin: ${row.id}`);
   };
@@ -383,7 +380,6 @@ function DocumentManager() {
     const confirmDelete = window.confirm(`Bạn có chắc muốn xóa ${row.name}?`);
     if (confirmDelete) {
       alert(`Đã xóa ${row.name}`);
-      // Thực hiện xóa khỏi dữ liệu
     }
   };
 

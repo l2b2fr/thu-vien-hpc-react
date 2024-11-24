@@ -5,9 +5,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import IconAnhSach from "../../assets/image/image.png";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 function ModalAddUser({ isOpen, onClose }) {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isOpen) {
@@ -20,15 +23,15 @@ function ModalAddUser({ isOpen, onClose }) {
 
   const quyenHan = [
     {
-      value: "admin",
+      value: "1",
       label: "Quản trị viên",
     },
     {
-      value: "thuthu",
+      value: "2",
       label: "Thủ thư",
     },
     {
-      value: "docgia",
+      value: "3",
       label: "Độc giả",
     },
   ];
@@ -46,6 +49,7 @@ function ModalAddUser({ isOpen, onClose }) {
 
   const [formData, setFormData] = useState({
     maNguoiDung: "",
+    idPhanQuyenDung: "",
     tenNguoiDung: "",
     phone: "",
     ngaySinh: "",
@@ -62,6 +66,7 @@ function ModalAddUser({ isOpen, onClose }) {
   useEffect(() => {
     setFormData({
       maNguoiDung: "",
+      idPhanQuyen: "",
       tenNguoiDung: "",
       phone: "",
       ngaySinh: "",
@@ -98,14 +103,48 @@ function ModalAddUser({ isOpen, onClose }) {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem("userToken");
+
+      // Tạo một đối tượng FormData
+      const formDataToSend = new FormData();
+
+      // Thêm các giá trị từ form vào FormData
+      for (let key in formData) {
+        if (formData[key] !== undefined) {
+          if (key === "imageUrl" && formData[key]) {
+            // Thêm ảnh nếu có
+            const fileInput = document.querySelector('input[type="file"]');
+            const file = fileInput.files[0];
+            formDataToSend.append("imageUrl", file);
+          } else {
+            formDataToSend.append(key, formData[key]);
+          }
+        }
+      }
+
+      // Gửi dữ liệu đến server
       const response = await axios.post(
-        "https://your-api-endpoint.com",
-        formData
+        "http://localhost:2004/api/user/add",
+        formDataToSend,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
+      // Assuming response.data contains an object with a 'message' key
+      const message = response.data.message || "User added successfully"; // Default message if 'message' is undefined
+
+      toast.success(message); // Show success message
       console.log("Success:", response.data);
+      onClose();
+      navigate("/lap-the-doc-gia");
       // Xử lý dữ liệu phản hồi từ server (nếu cần)
     } catch (error) {
       console.error("Error:", error);
+      toast.error("An error occurred while submitting the form");
     }
   };
 
@@ -201,11 +240,7 @@ function ModalAddUser({ isOpen, onClose }) {
                   {/* Upload Ảnh */}
                   <div className="flex items-center space-x-4">
                     <img
-                      src={
-                        formData.imageUrl
-                          ? formData.imageUrl
-                          : IconAnhSach
-                      }
+                      src={formData.imageUrl ? formData.imageUrl : IconAnhSach}
                       alt="Uploaded"
                       className="w-[55px] h-[55px] object-cover rounded-full"
                       onLoad={() =>
@@ -276,8 +311,8 @@ function ModalAddUser({ isOpen, onClose }) {
                   {/* Quyền hạn */}
                   <div>
                     <select
-                      id="quyenHan"
-                      value={formData.quyenHan}
+                      id="idPhanQuyen"
+                      value={formData.idPhanQuyen}
                       onChange={handleChange}
                       className="mt-1 block w-full px-4 py-2 text-base border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 h-[56px]"
                     >
